@@ -43,6 +43,9 @@ public class MCBetaTerrainGenerator {
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 		}
+		
+		//Set up a new generator with the user's seed.
+		Generator generator = new Generator(seedInput);
 
 	}
 
