@@ -3,7 +3,7 @@ package me.sd5.mcbetaterraingenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.sd5.terrain173.exceptions.InvalidInputException;
+import me.sd5.mcbetaterraingenerator.exceptions.InvalidInputException;
 
 /**
  * @author sd5

@@ -1,4 +1,4 @@
-package me.sd5.terrain173.exceptions;
+package me.sd5.mcbetaterraingenerator.exceptions;
 
 /**
  * @author sd5
