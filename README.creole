@@ -1,2 +1,5 @@
 =mcBetaTerrainGenerator=
-...
+mcBetaTerrainGenerator is a Java program which generates minecraft terrain from the old Beta 1.7.3 version.
+
+==Concept==
+mcBetaTerrainGenerator uses an old Beta 1.7.3 minecraft server for the terrain generation and a new 1.5.2 minecraft server for converting it into the new anvil file format.
