@@ -2,6 +2,7 @@ package me.sd5.mcbetaterraingenerator;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,6 +63,38 @@ public class Util {
 		
 		is.close();
 		os.close();
+		
+	}
+	
+	/**
+	 * Deletes a file or directory recursively.
+	 * @param path The file or directory to delete.
+	 * @throws FileNotFoundException
+	 */
+	public static void deleteFile(String path) throws FileNotFoundException {
+		
+		File file = new File(path);
+		
+		Util.deleteFile(file);
+		
+	}
+	
+	/**
+	 * Deletes a file or directory recursively.
+	 * @param file The file or directory to delete.
+	 * @throws FileNotFoundException
+	 */
+	public static void deleteFile(File file) throws FileNotFoundException {
+		
+		if(!file.exists()) {
+			throw new FileNotFoundException(file.getAbsolutePath());
+		}
+		
+		if(file.isDirectory()) {
+			for(File f : file.listFiles()) {
+				Util.deleteFile(f);
+			}
+		}
 		
 	}
 
