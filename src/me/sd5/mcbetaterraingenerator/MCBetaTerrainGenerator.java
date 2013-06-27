@@ -1,5 +1,8 @@
 package me.sd5.mcbetaterraingenerator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -63,6 +66,26 @@ public class MCBetaTerrainGenerator {
 		} catch (InvalidInputException e) {
 			e.printStackTrace();
 		}
+		
+		//Remove old files.
+		try {
+			Util.deleteFile(mainDir);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		//Create the needed files.
+		try {
+			Util.copyFileFromJar(jar_mcserver_b173, genDir);
+			Util.copyFileFromJar(jar_mcserver_f152, conDir);
+			Util.copyFileFromJar(jar_serverproperties_b173, genDir);
+			Util.copyFileFromJar(jar_levelDat_b173, genDir + File.separator + worldDir);
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 		//Set up a new generator with the user's seed.
 		Generator generator = new Generator(seedInput);
