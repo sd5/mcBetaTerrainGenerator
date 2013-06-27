@@ -51,18 +51,22 @@ public class Util {
 	 */
 	public static void copyFileFromJar(String name, String destination) throws IOException {
 		
-		InputStream is = MCBetaTerrainGenerator.class.getResourceAsStream("/files" + name);
+		InputStream is = MCBetaTerrainGenerator.class.getResourceAsStream("/files/" + name);
 		OutputStream os = new FileOutputStream(destination);
 		
 		int read = 0;
 		byte[] buffer = new byte[1024];
 		
-		while((read = is.read(buffer)) != -1) {
-			os.write(buffer, 0, read);
+		try {
+			while((read = is.read(buffer)) != -1) {
+				os.write(buffer, 0, read);
+			}
+			
+			is.close();
+			os.close();
+		} catch(NullPointerException e) {
+			throw new FileNotFoundException("The file " + name + " was not found in the jar archive!");	
 		}
-		
-		is.close();
-		os.close();
 		
 	}
 	
