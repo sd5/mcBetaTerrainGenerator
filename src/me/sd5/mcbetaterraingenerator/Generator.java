@@ -53,7 +53,7 @@ public class Generator {
 	 */
 	public void generate(Area area) {
 		
-		LevelFile levelDat = new LevelFile(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.worldDir + File.separator + MCBetaTerrainGenerator.levelDat_b173));
+		LevelFile levelDat = new LevelFile(new File(MCBetaTerrainGenerator.genDirWorld + File.separator + MCBetaTerrainGenerator.levelDat_b173));
 		MinecraftServer server = new MinecraftServer(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.mcserver_b173));
 		
 		//Change the seed in the level.dat
@@ -66,6 +66,7 @@ public class Generator {
 		
 		//Iterate through each region.
 		for(Region region : area.getRegions()) {
+			System.out.println("Generating region " + region.toString());
 			//Set the spawn and run the server for each spawnpoint.
 			for(int[] spawn : spawnPoints) {
 				levelDat.spawnX = region.getX() + spawn[0];
@@ -76,12 +77,13 @@ public class Generator {
 					System.out.println("Could not save level.dat");
 				}
 				
+				System.out.println("Starting minecraft server with spawn x: " + levelDat.spawnX + " y: " + levelDat.spawnY + " z: " + levelDat.spawnZ);
 				try {
 					server.run();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (ServerFailureException e) {
-					System.out.println("Could not start minecraft server! Broken file?");
+					System.out.println(e.getMessage());
 				}
 			}
 		}

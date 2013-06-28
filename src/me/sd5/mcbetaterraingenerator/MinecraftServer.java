@@ -34,14 +34,14 @@ public class MinecraftServer {
 	public void run() throws IOException, ServerFailureException {
 		
 		ProcessBuilder pb = new ProcessBuilder();
-		pb.command("java -jar " + serverJar.getName() + " nogui");
+		pb.command("java", "-jar", serverJar.getAbsolutePath(), "nogui");
 		pb.directory(serverJar.getParentFile());
 		pb.redirectErrorStream(true);
 		Process process;
 		try {
 			process = pb.start();
 		} catch (IOException e) {
-			throw new ServerFailureException("Failed to start the minecraft server! Wrong file?");
+			throw new ServerFailureException("Failed to start the minecraft server! " + e.getMessage());
 		}
 		
 		//A reader for reading the output of the minecraft server and writer for sending commands to the server.
