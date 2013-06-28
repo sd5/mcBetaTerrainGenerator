@@ -89,6 +89,10 @@ public class MCBetaTerrainGenerator {
 		for(Area area : areas) {
 			generator.generate(area);
 		}
+		
+		//Automatically converts the .mcr files to .mca
+		Converter converter = new Converter();
+		converter.convert(areas);
 
 	}
 

@@ -69,8 +69,8 @@ public class Generator {
 			System.out.println("Generating region " + region.toString());
 			//Set the spawn and run the server for each spawnpoint.
 			for(int[] spawn : spawnPoints) {
-				levelDat.spawnX = region.getX() + spawn[0];
-				levelDat.spawnZ = region.getZ() + spawn[1];
+				levelDat.spawnX = region.getX() * 512 + spawn[0];
+				levelDat.spawnZ = region.getZ() * 512 + spawn[1];
 				try {
 					levelDat.save();
 				} catch (IOException e) {

@@ -40,6 +40,17 @@ public class Region {
 		
 	}
 	
+	/**
+	 * Returns the filename of the region.
+	 * @param anvil If true returns the filename for the anvil file format otherwise for mcregions.
+	 * @return The filename.
+	 */
+	public String getFilename(boolean anvil) {
+		
+		return "r." + x + "." + z + ((anvil) ? ".mca" : ".mcr");
+		
+	}
+	
 	@Override
 	public String toString() {
 		
