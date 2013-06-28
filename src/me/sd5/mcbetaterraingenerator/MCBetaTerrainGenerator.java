@@ -60,7 +60,7 @@ public class MCBetaTerrainGenerator {
 		
 		//Try to parse the user input into the regions which will be generated.
 		AreaInputParser aip = new AreaInputParser(";", ",");
-		ArrayList<Area> areas;
+		ArrayList<Area> areas = null;
 		try {
 			 areas = aip.parseInput(areasInput);
 		} catch (InvalidInputException e) {
@@ -84,6 +84,9 @@ public class MCBetaTerrainGenerator {
 		
 		//Set up a new generator with the user's seed.
 		Generator generator = new Generator(seedInput);
+		for(Area area : areas) {
+			generator.generate(area);
+		}
 
 	}
 
