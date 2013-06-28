@@ -1,6 +1,10 @@
 package me.sd5.mcbetaterraingenerator;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+
+import me.sd5.mcbetaterraingenerator.exceptions.ServerFailureException;
 
 /**
  * @author sd5
@@ -8,8 +12,16 @@ import java.util.Date;
  * Changes the spawn point in level.dat and start the generation/converting server.
  */
 public class Generator {
-
-	long seed;
+	
+	private final long seed;
+	
+	//This 2D-array defines the where to set the spawn points for each region.
+	private static final int[][] spawnPoints = new int[][] {
+		{  0 + 128,   0 + 128},
+		{512 - 128,   0 + 128},
+		{  0 + 128, 512 - 128},
+		{512 - 128, 512 - 128}
+	};
 	
 	/**
 	 * Creates a new generator with the given seed.
@@ -21,6 +33,7 @@ public class Generator {
 		//If the input is empty, use the current time milliseconds as seed.
 		//If the seed is a number, use that number as seed.
 		//If the seed is not a number, user it's hashcode as seed.
+		long seed;
 		if(seedInput == "") {
 			seed = new Date().getTime();
 		} else {
@@ -28,6 +41,48 @@ public class Generator {
 				seed = Long.parseLong(seedInput);
 			} catch(NumberFormatException e) {
 				seed = seedInput.hashCode();
+			}
+		}
+		this.seed = seed;
+		
+	}
+	
+	/**
+	 * Handles the generation process.
+	 * @param area The area to generate.
+	 */
+	public void generate(Area area) {
+		
+		LevelFile levelDat = new LevelFile(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.worldDir + File.separator + MCBetaTerrainGenerator.levelDat_b173));
+		MinecraftServer server = new MinecraftServer(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.mcserver_b173));
+		
+		//Change the seed in the level.dat
+		levelDat.randomSeed = seed;
+		try {
+			levelDat.save();
+		} catch (IOException e) {
+			System.out.println("Could not save level.dat");
+		}
+		
+		//Iterate through each region.
+		for(Region region : area.getRegions()) {
+			//Set the spawn and run the server for each spawnpoint.
+			for(int[] spawn : spawnPoints) {
+				levelDat.spawnX = region.getX() + spawn[0];
+				levelDat.spawnZ = region.getZ() + spawn[1];
+				try {
+					levelDat.save();
+				} catch (IOException e) {
+					System.out.println("Could not save level.dat");
+				}
+				
+				try {
+					server.run();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ServerFailureException e) {
+					System.out.println("Could not start minecraft server! Broken file?");
+				}
 			}
 		}
 		

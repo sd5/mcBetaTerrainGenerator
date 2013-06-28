@@ -46,7 +46,7 @@ public class Area {
 	/**
 	 * @return A list of the regions this area contains.
 	 */
-	public ArrayList<Region> getChunks() {
+	public ArrayList<Region> getRegions() {
 		
 		return regions;
 		
