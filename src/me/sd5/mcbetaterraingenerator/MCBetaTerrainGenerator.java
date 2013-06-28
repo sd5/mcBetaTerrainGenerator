@@ -78,6 +78,7 @@ public class MCBetaTerrainGenerator {
 			Util.copyFileFromJar(jar_mcserver_f152, conDir + File.separator + mcserver_f152);
 			Util.copyFileFromJar(jar_serverproperties_b173, genDir + File.separator + serverproperties_b173);
 			Util.copyFileFromJar(jar_levelDat_b173, genDirWorld + File.separator + levelDat_b173);
+			Util.copyFileFromJar(jar_levelDat_b173, conDirWorld + File.separator + levelDat_b173);
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
