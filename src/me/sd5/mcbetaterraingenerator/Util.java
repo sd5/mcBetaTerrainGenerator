@@ -51,6 +51,10 @@ public class Util {
 	 */
 	public static void copyFileFromJar(String name, String destination) throws IOException {
 		
+		//Make the directories for the file.
+		File destFile = new File(destination);
+		destFile.getParentFile().mkdirs();
+		
 		InputStream is = MCBetaTerrainGenerator.class.getResourceAsStream("/files/" + name);
 		OutputStream os = new FileOutputStream(destination);
 		
@@ -75,7 +79,7 @@ public class Util {
 	 * @param path The file or directory to delete.
 	 * @throws FileNotFoundException
 	 */
-	public static void deleteFile(String path) throws FileNotFoundException {
+	public static void deleteFile(String path) {
 		
 		File file = new File(path);
 		
@@ -88,10 +92,10 @@ public class Util {
 	 * @param file The file or directory to delete.
 	 * @throws FileNotFoundException
 	 */
-	public static void deleteFile(File file) throws FileNotFoundException {
+	public static void deleteFile(File file) {
 		
 		if(!file.exists()) {
-			throw new FileNotFoundException(file.getAbsolutePath());
+			return;
 		}
 		
 		if(file.isDirectory()) {
@@ -99,6 +103,8 @@ public class Util {
 				Util.deleteFile(f);
 			}
 		}
+		
+		file.delete();
 		
 	}
 

@@ -15,7 +15,7 @@ import me.sd5.mcbetaterraingenerator.exceptions.InvalidInputException;
 public class MCBetaTerrainGenerator {
 	
 	//The constant names of the files in the jar.
-	public static final String jar_levelDat_b173 = "level_bat_1.7.3.dat";
+	public static final String jar_levelDat_b173 = "level_beta_1.7.3.dat";
 	public static final String jar_mcserver_b173 = "minecraft_server_beta_1.7.3.jar";
 	public static final String jar_mcserver_f152 = "minecraft_server_final_1.5.2.jar";
 	public static final String jar_serverproperties_b173 = "server_beta_1.7.3.properties";
@@ -28,9 +28,9 @@ public class MCBetaTerrainGenerator {
 	
 	//The constant paths.
 	public static final String mainDir = "mcBetaTerrainGenerator";
-	public static final String genDir = mainDir + "generation";
-	public static final String conDir = mainDir + "conversion";
-	public static final String endDir = mainDir + "finished";
+	public static final String genDir = mainDir + File.separator + "generation";
+	public static final String conDir = mainDir + File.separator + "conversion";
+	public static final String endDir = mainDir + File.separator + "finished";
 	public static final String worldDir = "world";
 	public static final String regionDir = "region";
 			
@@ -68,24 +68,19 @@ public class MCBetaTerrainGenerator {
 		}
 		
 		//Remove old files.
-		try {
-			Util.deleteFile(mainDir);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		Util.deleteFile(mainDir);
 		
 		//Create the needed files.
 		try {
-			Util.copyFileFromJar(jar_mcserver_b173, genDir);
-			Util.copyFileFromJar(jar_mcserver_f152, conDir);
-			Util.copyFileFromJar(jar_serverproperties_b173, genDir);
-			Util.copyFileFromJar(jar_levelDat_b173, genDir + File.separator + worldDir);
+			Util.copyFileFromJar(jar_mcserver_b173, genDir + File.separator + mcserver_b173);
+			Util.copyFileFromJar(jar_mcserver_f152, conDir + File.separator + mcserver_f152);
+			Util.copyFileFromJar(jar_serverproperties_b173, genDir + File.separator + serverproperties_b173);
+			Util.copyFileFromJar(jar_levelDat_b173, genDir + File.separator + worldDir + File.separator + levelDat_b173);
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		
 		//Set up a new generator with the user's seed.
 		Generator generator = new Generator(seedInput);
