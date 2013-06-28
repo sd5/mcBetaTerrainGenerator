@@ -51,7 +51,7 @@ public class Generator {
 	 * Handles the generation process.
 	 * @param area The area to generate.
 	 */
-	public void generate(Area area) {
+	public void generate(Area area, boolean printInfo) {
 		
 		LevelFile levelDat = new LevelFile(new File(MCBetaTerrainGenerator.genDirWorld + File.separator + MCBetaTerrainGenerator.levelDat_b173));
 		MinecraftServer server = new MinecraftServer(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.mcserver_b173));
@@ -64,9 +64,11 @@ public class Generator {
 			System.out.println("Could not save level.dat");
 		}
 		
+		//Count how many regions alread generated.
+		int amount = 0;
+		
 		//Iterate through each region.
 		for(Region region : area.getRegions()) {
-			System.out.println("Generating region " + region.toString());
 			//Set the spawn and run the server for each spawnpoint.
 			for(int[] spawn : spawnPoints) {
 				levelDat.spawnX = region.getX() * 512 + spawn[0];
@@ -77,7 +79,6 @@ public class Generator {
 					System.out.println("Could not save level.dat");
 				}
 				
-				System.out.println("Starting minecraft server with spawn x: " + levelDat.spawnX + " y: " + levelDat.spawnY + " z: " + levelDat.spawnZ);
 				try {
 					server.run();
 				} catch (IOException e) {
@@ -85,7 +86,12 @@ public class Generator {
 				} catch (ServerFailureException e) {
 					System.out.println(e.getMessage());
 				}
+				
+				if(printInfo) {
+					System.out.println(Util.calculatePercentage(++amount, area.getRegions().size() * spawnPoints.length));
+				}
 			}
+			
 		}
 		
 	}

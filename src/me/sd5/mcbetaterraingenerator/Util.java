@@ -107,5 +107,11 @@ public class Util {
 		file.delete();
 		
 	}
+	
+	public static String calculatePercentage(int amount, int total) {
+		
+		return Math.round((float)amount / (float)total * 100) + "%";
+		
+	}
 
 }

@@ -86,12 +86,14 @@ public class MCBetaTerrainGenerator {
 		}
 		
 		//Set up a new generator with the user's seed.
+		System.out.println("Generating...");
 		Generator generator = new Generator(seedInput);
 		for(Area area : areas) {
-			generator.generate(area);
+			generator.generate(area, true);
 		}
 		
 		//Automatically converts the .mcr files to .mca
+		System.out.println("Converter...");
 		Converter converter = new Converter();
 		converter.convert(areas);
 
