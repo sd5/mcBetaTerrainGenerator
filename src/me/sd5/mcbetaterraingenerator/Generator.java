@@ -34,14 +34,16 @@ public class Generator {
 		//If the seed is a number, use that number as seed.
 		//If the seed is not a number, user it's hashcode as seed.
 		long seed;
-		if(seedInput == "") {
+		if(seedInput.equals("")) {
 			seed = new Date().getTime();
+			System.out.println("Seed: " + seed + " (random)");
 		} else {
 			try {
 				seed = Long.parseLong(seedInput);
 			} catch(NumberFormatException e) {
 				seed = seedInput.hashCode();
 			}
+			System.out.println("Seed: " + seed);
 		}
 		this.seed = seed;
 		

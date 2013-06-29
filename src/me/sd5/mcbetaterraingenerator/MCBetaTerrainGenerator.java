@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 import me.sd5.mcbetaterraingenerator.exceptions.InvalidInputException;
@@ -85,6 +86,9 @@ public class MCBetaTerrainGenerator {
 			e.printStackTrace();
 		}
 		
+		//Save start time
+		long time = new Date().getTime();
+		
 		//Set up a new generator with the user's seed.
 		System.out.println("\nGenerating...");
 		Generator generator = new Generator(seedInput);
@@ -97,8 +101,8 @@ public class MCBetaTerrainGenerator {
 		Converter converter = new Converter();
 		converter.convert(areas);
 		
-		//Tell the user that we finished.
-		System.out.println("\nFinished!");
+		//Tell the user that we finished and tell the user how long the process took.
+		System.out.println("\nFinished! (Process took " + ((new Date().getTime() - time) / 1000) + " seconds)");
 
 	}
 
