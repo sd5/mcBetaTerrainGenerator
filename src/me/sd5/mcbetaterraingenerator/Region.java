@@ -51,6 +51,21 @@ public class Region {
 		
 	}
 	
+	/**
+	 * Checks whether the coordinates of this regions equal with the ones of another region.
+	 * @param region The region to compare with this one.
+	 * @return Whether the regions are the same.
+	 */
+	public boolean equals(Region region) {
+		
+		if(region.getX() == this.x && region.getZ() == this.z) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
 	@Override
 	public String toString() {
 		

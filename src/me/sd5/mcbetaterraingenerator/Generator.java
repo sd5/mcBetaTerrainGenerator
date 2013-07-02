@@ -2,6 +2,7 @@ package me.sd5.mcbetaterraingenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import me.sd5.mcbetaterraingenerator.exceptions.ServerFailureException;
@@ -51,9 +52,9 @@ public class Generator {
 	
 	/**
 	 * Handles the generation process.
-	 * @param area The area to generate.
+	 * @param regions The regions to generate.
 	 */
-	public void generate(Area area, boolean printInfo) {
+	public void generate(ArrayList<Region> regions) {
 		
 		LevelFile levelDat = new LevelFile(new File(MCBetaTerrainGenerator.genDirWorld + File.separator + MCBetaTerrainGenerator.levelDat_b173));
 		MinecraftServer server = new MinecraftServer(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.mcserver_b173));
@@ -70,7 +71,7 @@ public class Generator {
 		int amount = 0;
 		
 		//Iterate through each region.
-		for(Region region : area.getRegions()) {
+		for(Region region : regions) {
 			//Set the spawn and run the server for each spawnpoint.
 			for(int[] spawn : spawnPoints) {
 				levelDat.spawnX = region.getX() * 512 + spawn[0];
@@ -89,9 +90,7 @@ public class Generator {
 					System.out.println(e.getMessage());
 				}
 				
-				if(printInfo) {
-					System.out.println(Util.calculatePercentage(++amount, area.getRegions().size() * spawnPoints.length));
-				}
+				System.out.println(Util.calculatePercentage(++amount, regions.size() * spawnPoints.length));
 			}
 			
 		}

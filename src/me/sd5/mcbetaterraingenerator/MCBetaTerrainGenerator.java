@@ -89,12 +89,22 @@ public class MCBetaTerrainGenerator {
 		//Save start time
 		long time = new Date().getTime();
 		
+		//Get all regions of all areas without duplicates.
+		ArrayList<Region> regions = new ArrayList<Region>();
+		for(Area area : areas) {
+			for(Region region1 : area.getRegions()) {
+				for(Region region2 : regions) {
+					if(!region1.equals(region2)) {
+						regions.add(region1);
+					}
+				}
+			}
+		}
+		
 		//Set up a new generator with the user's seed.
 		System.out.println("\nGenerating...");
 		Generator generator = new Generator(seedInput);
-		for(Area area : areas) {
-			generator.generate(area, true);
-		}
+		generator.generate(regions);
 		
 		//Automatically converts the .mcr files to .mca
 		System.out.println("\nConverting...");
