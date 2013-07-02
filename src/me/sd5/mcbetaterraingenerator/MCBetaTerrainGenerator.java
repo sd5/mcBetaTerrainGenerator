@@ -87,7 +87,7 @@ public class MCBetaTerrainGenerator {
 		}
 		
 		//Save start time
-		long time = new Date().getTime();
+		long startTime = new Date().getTime();
 		
 		//Get all regions of all areas without duplicates.
 		ArrayList<Region> regions = new ArrayList<Region>();
@@ -122,7 +122,11 @@ public class MCBetaTerrainGenerator {
 		converter.convert(regions);
 		
 		//Tell the user that we finished and tell the user how long the process took.
-		System.out.println("\nFinished! (Process took " + ((new Date().getTime() - time) / 1000) + " seconds)");
+		double endTime = Math.round((new Date().getTime() - startTime) / 10D) / 100D;
+		double averageTime = Math.round(endTime / regions.size() * 100D) / 100D;
+		System.out.println("\nFinished!");
+		System.out.println("Generated " + regions.size() + " regions in " + endTime + " seconds.");
+		System.out.println("Average speed: " + averageTime + " seconds per region.");
 
 	}
 
