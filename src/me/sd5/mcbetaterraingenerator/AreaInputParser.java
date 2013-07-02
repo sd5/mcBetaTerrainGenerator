@@ -1,7 +1,6 @@
 package me.sd5.mcbetaterraingenerator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import me.sd5.mcbetaterraingenerator.exceptions.InvalidInputException;
 

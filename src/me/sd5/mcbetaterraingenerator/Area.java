@@ -1,7 +1,6 @@
 package me.sd5.mcbetaterraingenerator;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author sd5
@@ -35,8 +34,8 @@ public class Area {
 		
 		//Find all chunks in this area.
 		regions = new ArrayList<Region>();
-		for(int x = x1; x <= x2; x++) {
-			for(int z = z1; z <= z2; z++) {
+		for(int x = this.x1; x <= this.x2; x++) {
+			for(int z = this.z1; z <= this.z2; z++) {
 				regions.add(new Region(x, z));
 			}
 		}
