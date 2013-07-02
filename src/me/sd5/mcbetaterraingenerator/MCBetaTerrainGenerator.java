@@ -91,12 +91,22 @@ public class MCBetaTerrainGenerator {
 		
 		//Get all regions of all areas without duplicates.
 		ArrayList<Region> regions = new ArrayList<Region>();
+		//Go through each area.
 		for(Area area : areas) {
+			//Go through each region.
 			for(Region region1 : area.getRegions()) {
+				//Check whether a region with the same coordinates has been already added, if not add it.
+				boolean duplicate = false;
+				duplicate:
 				for(Region region2 : regions) {
-					if(!region1.equals(region2)) {
-						regions.add(region1);
+					if(region1.equals(region2)) {
+						duplicate = true;
+						break duplicate;
 					}
+				}
+				//If the region has been marked as a duplicate, don't add it again.
+				if(!duplicate) {
+					regions.add(region1);
 				}
 			}
 		}
@@ -109,7 +119,7 @@ public class MCBetaTerrainGenerator {
 		//Automatically converts the .mcr files to .mca
 		System.out.println("\nConverting...");
 		Converter converter = new Converter();
-		converter.convert(areas);
+		converter.convert(regions);
 		
 		//Tell the user that we finished and tell the user how long the process took.
 		System.out.println("\nFinished! (Process took " + ((new Date().getTime() - time) / 1000) + " seconds)");
