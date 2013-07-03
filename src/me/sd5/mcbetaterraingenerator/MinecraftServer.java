@@ -14,6 +14,10 @@ import me.sd5.mcbetaterraingenerator.exceptions.ServerFailureException;
  */
 public class MinecraftServer {
 
+	//RAM admission for the servers in megabytes.
+	public static final int minHeap = 256;
+	public static final int maxHeap = 512;
+	
 	private final File serverJar;
 	
 	/**
@@ -34,7 +38,7 @@ public class MinecraftServer {
 	public void run() throws IOException, ServerFailureException {
 		
 		ProcessBuilder pb = new ProcessBuilder();
-		pb.command("java", "-jar", serverJar.getAbsolutePath(), "nogui");
+		pb.command("java", "-Xmx" + maxHeap + "M", "-Xms" + minHeap + "M", "-jar", serverJar.getAbsolutePath(), "nogui");
 		pb.directory(serverJar.getParentFile());
 		pb.redirectErrorStream(true);
 		Process process;
