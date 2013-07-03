@@ -57,19 +57,10 @@ public class MinecraftServer {
 			//Wait until the server is ready then send the stop command.
 			if(line.contains("[INFO] Done")) {
 				osw.write("stop");
-				br.close();
 				osw.close();
-				
-				//Wait until the server process is closed.
-				try {
-					process.waitFor();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
-				return;
 			}
 		}
+		br.close();
 		
 	}
 	

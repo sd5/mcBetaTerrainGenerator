@@ -56,6 +56,8 @@ public class Generator {
 	 */
 	public void generate(ArrayList<Region> regions) {
 		
+		System.out.println("Generating " + regions.size() + " regions...");
+		
 		LevelFile levelDat = new LevelFile(new File(MCBetaTerrainGenerator.genDirWorld + File.separator + MCBetaTerrainGenerator.levelDat_b173));
 		MinecraftServer server = new MinecraftServer(new File(MCBetaTerrainGenerator.genDir + File.separator + MCBetaTerrainGenerator.mcserver_b173));
 		
