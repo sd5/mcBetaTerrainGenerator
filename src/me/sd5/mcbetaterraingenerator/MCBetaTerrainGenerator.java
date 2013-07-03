@@ -23,6 +23,7 @@ public class MCBetaTerrainGenerator {
 	
 	//The constant names of the files on the hard disk.
 	public static final String levelDat_b173 = "level.dat";
+	public static final String levelDat_f152 = "level.dat";
 	public static final String mcserver_b173 = "minecraft_server.jar";
 	public static final String mcserver_f152 = "minecraft_server.jar";
 	public static final String serverproperties_b173 = "server.properties";
@@ -30,12 +31,14 @@ public class MCBetaTerrainGenerator {
 	//The constant paths.
 	public static final String mainDir = "mcBetaTerrainGenerator";
 	public static final String genDir = mainDir + File.separator + "generation";
-	public static final String conDir = mainDir + File.separator + "conversion";
-	public static final String endDir = mainDir + File.separator + "finished";
 	public static final String genDirWorld = genDir + File.separator + "world";
 	public static final String genDirRegion = genDirWorld + File.separator + "region";
+	public static final String conDir = mainDir + File.separator + "conversion";
 	public static final String conDirWorld = conDir + File.separator + "world";
 	public static final String conDirRegion = conDirWorld + File.separator + "region";
+	public static final String endDir = mainDir + File.separator + "finished";
+	public static final String endDirWorld = endDir + File.separator + "world";
+	public static final String endDirRegion = endDirWorld + File.separator + "region";
 			
 	public static void main(String[] args) {
 		
